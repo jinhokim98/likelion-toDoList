@@ -4,24 +4,25 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href='style.css'>
     <title>To Do List</title>
 </head>
 <body>
     <header>
         <h1 class="title">To Do List</h1>
-        <div class="date"></div>
     </header>
+    <section class="dateContainer">
+        <div class="date"></div>
+    </section>
     <section class="inputDoList">
-        <div class="title"></div>
         <form class="inputForm">
             <label for="input_">할 일을 입력하세요</label>
             <input type="text" name="" id="input_">
-            <button class="submitBtn">제출</button>
+            <button class="submitBtn">등록</button>
         </form>
     </section>
     <section class="showListContainer">
-        <ul class="showList">
-        </ul>
+        <ul class="showList"></ul>
     </section>
     <script src="index.js"></script>
 </body>
