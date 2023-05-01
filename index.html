@@ -18,7 +18,10 @@
         <form class="inputForm">
             <label for="input_">할 일을 입력하세요</label>
             <input type="text" name="" id="input_">
-            <button class="submitBtn">등록</button>
+            <div class="btnGroup">
+                <button class="submitBtn" onclick="showToDo(event)">등록</button>
+                <button class="deleteBtn" onclick="deleteList(event)">삭제</button>
+            </div>
         </form>
     </section>
     <section class="showListContainer">

@@ -1,23 +1,24 @@
 const inputBox = document.querySelector('#input_');
 const list = document.querySelector('.showList');
 
+let listNumber = 0;
+
 function showToDo(event) {
     event.preventDefault();
 
     const toDo = inputBox.value;
     const appendItem = document.createElement('li');
     const item = `
-    <div class='row'>
-        <input type='checkbox' class='checkbox'/>
-        <span class='desc'>${toDo}</span>
+    <div id='row${listNumber}' class='row'>
+        <input id='${listNumber}' type='checkbox' class='checkbox live' onclick='setLineThrough(this)'/>
+        <span id='desc${listNumber}' class='desc'>${toDo}</span>
     <div>
     `;
     appendItem.innerHTML = item;
     list.appendChild(appendItem);
     listStyle();
+    listNumber++;
 };
-
-document.addEventListener('submit', showToDo);
 
 function showToday() {
     const today = new Date();
@@ -55,3 +56,25 @@ function listStyle() {
     });
 }
 
+function setLineThrough(idx) {
+    const selectList = document.querySelector(`#desc${idx.id}`);
+    idx.checked
+        ? selectList.setAttribute('style', `
+            text-decoration: line-through;
+            margin-left: 10px;`)
+        : selectList.setAttribute('style', `
+            text-decoration: none;
+            margin-left: 10px;`);
+}
+
+function deleteList(event) {
+    event.preventDefault();
+
+    const allCheckbox = document.querySelectorAll('.checkbox');
+    const checkedCheckbox = [...allCheckbox]
+        .filter(checkbox => checkbox.checked === true)
+        .map(item => item.id)
+        .map(id => document.querySelector(`#row${id}`).parentNode);
+
+    checkedCheckbox.map(item => list.removeChild(item));
+}

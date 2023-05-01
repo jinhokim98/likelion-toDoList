@@ -94,7 +94,13 @@ header h1 {
     outline: none;
 }
 
-.inputDoList form button {
+.inputDoList form .btnGroup {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+.inputDoList form .btnGroup button {
     margin: 0 32px 24px 32px;
     padding: 8px 12px;
     border-radius: 5px;
