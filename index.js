@@ -13,14 +13,15 @@ function init() {
     let localStorageKeys = [];
     let dataList = []; 
 
+    // 로컬 스토리지에 있는 모든 키 이름을 가지고 온다.
     for (let i = 0; i<localStorage.length; i++) {
         localStorageKeys.push(localStorage.key(i));
     }
 
+    // 뽑아온 키 이름으로 데이터리스트에 내용을 추가한다.
     localStorageKeys.map(item => {
         dataList.push(JSON.parse(localStorage.getItem(item)));
     })
-
 
     dataList.map(item => {
         const appendItem = document.createElement('li');
@@ -116,19 +117,18 @@ function deleteList(event) {
     let deleteKey = [];
 
     const allCheckbox = document.querySelectorAll('.checkbox');
-    const checkedCheckbox = [...allCheckbox]
+    
+    // nodeList를 array로 변환해주기 위해
+    [...allCheckbox]
         .filter(checkbox => checkbox.checked === true)
         .map(item => item.id)
+        .map(id => {
+            deleteKey.push(id)
+            return id;
+        })
+        .map(id => document.querySelector(`#row${id}`).parentNode)
+        .map(item => list.removeChild(item));
 
-    // 삭제할 대상의 id를 저장한다.
-    checkedCheckbox.map(id => deleteKey.push(id));
-
-    const rowItem = checkedCheckbox
-    .map(id => document.querySelector(`#row${id}`).parentNode);
-
-    // View에서 지운다.
-    rowItem.map(item => list.removeChild(item));
-
-    // delete from local storige
+    // delete key from local storige
     deleteKey.map(id => localStorage.removeItem(id));
 }
